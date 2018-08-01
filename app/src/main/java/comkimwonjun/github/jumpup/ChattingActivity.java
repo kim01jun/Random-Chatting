@@ -20,7 +20,7 @@ import com.google.firebase.database.DatabaseReference;
 
 import java.util.ArrayList;
 
-//TODO: 생명주기 고려해서 Listener 삭제 및 다시 붙이기 / Image, Audio 파일 전송 추가 (Type 을 정해서 0=텍스트, 1=사진, 2=음성) / 나가기 시 MainActivity 로 다시 되돌아감
+//TODO: 생명주기 고려해서 Listener 삭제 및 다시 붙이기 / Image, Audio 파일 전송 추가 (Type 을 정해서 0=텍스트, 1=사진, 2=음성) / 나가기 시 MainActivity 로 다시 되돌아감 / Storage Room 폴더 삭제
 public class ChattingActivity extends AppCompatActivity {
 
     private static final int GET_IMAGE = 0;
