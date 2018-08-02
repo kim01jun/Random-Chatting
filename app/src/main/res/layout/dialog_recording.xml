@@ -6,9 +6,11 @@
 
     <Button
         android:id="@+id/recordingBtn"
-        android:layout_margin="100dp"
+        android:layout_margin="50dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="녹음하기"/>
+        android:text="녹음하기"
+        android:textColor="#fff"
+        android:background="@drawable/button"/>
 
 </LinearLayout>

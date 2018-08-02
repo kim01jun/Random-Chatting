@@ -4,14 +4,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center"
     tools:context=".MainActivity">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="50dp"
+        android:src="@drawable/starbucks_logo"/>
 
     <Button
         android:id="@+id/startBtn"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="30sp"
-        android:text="시작"/>
+        android:layout_margin="30dp"
+        android:textSize="20sp"
+        android:textColor="#fff"
+        android:background="@drawable/button"
+        android:text="시작"
+        android:layout_gravity="bottom"/>
 
 </LinearLayout>

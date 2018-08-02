@@ -4,44 +4,47 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:weightSum="10"
     tools:context=".ChattingActivity">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/messageList"
         android:scrollbars="vertical"
+        android:layout_weight="9"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight=".9">
+        android:layout_height="wrap_content">
     </android.support.v7.widget.RecyclerView>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:weightSum="1"
-        android:orientation="horizontal">
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        android:layout_weight="1"
+        android:weightSum="10"
+        android:gravity="center">
 
         <Button
             android:id="@+id/fileBtn"
+            android:layout_height="40dp"
             android:layout_width="0dp"
-            android:text="+"
-            android:textSize="20sp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.15"/>
+            android:layout_weight="1"
+            android:background="@drawable/file_btn"/>
 
         <EditText
             android:id="@+id/sendEdit"
             android:hint="할 말"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="0.65"
             android:layout_margin="5dp"
+            android:layout_weight="8"
             android:inputType="text" />
 
         <Button
             android:id="@+id/sendBtn"
-            android:text="보내기"
+            android:background="@drawable/send_btn"
             android:layout_width="0dp"
-            android:layout_weight="0.2"
-            android:layout_height="match_parent" />
+            android:layout_marginEnd="5dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
     </LinearLayout>
 </LinearLayout>

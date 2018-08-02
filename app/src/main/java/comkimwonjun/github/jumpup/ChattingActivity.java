@@ -78,6 +78,7 @@ public class ChattingActivity extends AppCompatActivity {
 
             @Override
             public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+                startActivity(new Intent(ChattingActivity.this, MainActivity.class));
                 Toast.makeText(ChattingActivity.this, "상대방이 나갔습니다.", Toast.LENGTH_SHORT).show();
                 finish();
             }
@@ -92,6 +93,10 @@ public class ChattingActivity extends AppCompatActivity {
         });
 
         sendBtn.setOnClickListener(v -> {
+            if(sendEdit.getText().toString().isEmpty()) {
+                Toast.makeText(this, "보낼 내용을 입력해 주세요", Toast.LENGTH_SHORT).show();
+                return;
+            }
             dbRef.child(room).push().setValue(new MessageData(Constants.TYPE_TEXT, uuid, sendEdit.getText().toString()));
             sendEdit.setText(null);
         });
@@ -99,6 +104,7 @@ public class ChattingActivity extends AppCompatActivity {
         fileBtn.setOnClickListener(v -> BottomSheetDialog.getInstance().show(getSupportFragmentManager(), "bottomSheet"));
 
         sendBtn.setOnLongClickListener(view -> {
+            startActivity(new Intent(this, MainActivity.class));
             finish();
             return false;
         });

@@ -9,6 +9,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
+        android:padding="15dp"
+        android:background="@drawable/chat_other"
+        android:textColor="#000"
         android:visibility="gone" />
 
     <ImageView

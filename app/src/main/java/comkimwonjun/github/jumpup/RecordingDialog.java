@@ -19,6 +19,7 @@ import java.util.Objects;
  * InProgress)JumpUp-Camp
  * Created by KimWonJun on 2018-08-01.
  */
+//TODO: 83번째줄 IllegalStateException 고치기
 public class RecordingDialog extends Dialog {
 
     private Button recordingBtn;
