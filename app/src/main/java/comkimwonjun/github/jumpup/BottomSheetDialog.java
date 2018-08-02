@@ -19,8 +19,6 @@ import java.util.Objects;
  */
 public class BottomSheetDialog extends BottomSheetDialogFragment {
 
-    private static final int GET_IMAGE = 0;
-
     public static BottomSheetDialog getInstance() {
         return new BottomSheetDialog();
     }
@@ -39,7 +37,7 @@ public class BottomSheetDialog extends BottomSheetDialogFragment {
             Intent intent = new Intent();
             intent.setType("image/*");
             intent.setAction(Intent.ACTION_GET_CONTENT);
-            Objects.requireNonNull(getActivity()).startActivityForResult(Intent.createChooser(intent, "Select Picture"), GET_IMAGE);
+            Objects.requireNonNull(getActivity()).startActivityForResult(Intent.createChooser(intent, "Select Picture"), Constants.REQUEST_GET_IMAGE);
             dismiss();
         });
 

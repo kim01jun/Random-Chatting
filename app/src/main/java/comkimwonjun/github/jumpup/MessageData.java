@@ -5,12 +5,6 @@ package comkimwonjun.github.jumpup;
  * Created by KimWonJun on 7/24/2018.
  */
 public class MessageData {
-
-    public final static int TEXT = 0;
-    public final static int IMAGE = 1;
-    public final static int AUDIO = 2;
-    public final static int TYPE_MAX = 3;
-
     private int type;
     private String uuid;
     private String message;

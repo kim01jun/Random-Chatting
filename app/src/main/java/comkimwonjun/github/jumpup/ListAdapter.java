@@ -1,13 +1,15 @@
 package comkimwonjun.github.jumpup;
 
+import android.content.Context;
 import android.media.MediaPlayer;
-import android.view.Gravity;
+import android.support.annotation.NonNull;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -21,85 +23,66 @@ import java.util.ArrayList;
  * Created by KimWonJun on 7/24/2018.
  */
 
-//TODO: 리사이클러뷰로 바꾸기
-public class ListAdapter extends BaseAdapter {
+public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     private ArrayList<MessageData> messageList;
     private MediaPlayer mediaPlayer;
+    private Context context;
     private String uuid;
 
-    ListAdapter(ArrayList<MessageData> messageList, String uuid) {
+    ListAdapter(ArrayList<MessageData> messageList, Context context, String uuid) {
         this.messageList = messageList;
+        this.context = context;
         this.uuid = uuid;
     }
 
+    @NonNull
     @Override
-    public int getCount() {
-        return messageList.size();
-    }
-
-    @Override
-    public Object getItem(int i) {
-        MessageData messageData = messageList.get(i);
-        return messageData.getUuid() + ":" + messageData.getMessage();
-    }
-
-    @Override
-    public long getItemId(int i) {
-        return i;
-    }
-
-    @Override
-    public int getViewTypeCount() {
-        return MessageData.TYPE_MAX;
-    }
-
-    @Override
-    public int getItemViewType(int pos) {
-        return messageList.get(pos).getType();
-    }
-
-    //TODO: layoutParams 설정 안되는 현상 수정하기
-    @Override
-    public View getView(int pos, View view, ViewGroup parent) {
-        MessageData messageData = messageList.get(pos);
-
-        LinearLayout linearLayout = new LinearLayout(parent.getContext());
-        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
-        layoutParams.setMargins(20, 20, 20, 20);
-
-        if (!uuid.equals(messageData.getUuid()))
-            layoutParams.gravity = Gravity.START;
-        else
-            layoutParams.gravity = Gravity.END;
-
-        switch (getItemViewType(pos)) {
-            case 0:
-                TextView messageText = new TextView(parent.getContext());
-                messageText.setLayoutParams(layoutParams);
-                messageText.setTextSize(20);
-                if (!uuid.equals(messageData.getUuid()))
-                    messageText.setText("낯선 사람:" + messageData.getMessage());
-                else
-                    messageText.setText("나:" + messageData.getMessage());
-                linearLayout.addView(messageText);
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        Log.d(Constants.TAG, "Here!");
+        int layout = -1;
+        switch(viewType) {
+            case Constants.OTHER_MESSAGE:
+                layout = R.layout.item_other;
                 break;
-            case 1:
-                ImageView imageView = new ImageView(parent.getContext());
-                imageView.setLayoutParams(layoutParams);
-                linearLayout.addView(imageView);
+            case Constants.USER_MESSAGE:
+                layout = R.layout.item_user;
+                break;
+        }
+        View v = LayoutInflater.from(parent.getContext()).inflate(layout, parent, false);
+        return new ViewHolder(v);
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        MessageData messageData = messageList.get(position);
+        Log.d(Constants.TAG, messageData.getType() + ": " + messageData.getMessage());
+        switch (messageData.getType())
+        {
+            case Constants.TYPE_TEXT:
+                holder.message.setVisibility(View.VISIBLE);
+                holder.image.setVisibility(View.GONE);
+                holder.audioBtn.setVisibility(View.GONE);
+                holder.message.setText(messageData.getMessage());
+                holder.message.setTextSize(20);
+                break;
+            case Constants.TYPE_IMAGE:
+                holder.message.setVisibility(View.GONE);
+                holder.image.setVisibility(View.VISIBLE);
+                holder.audioBtn.setVisibility(View.GONE);
                 References.getStorageRef().child(messageData.getMessage())
-                        .getDownloadUrl().addOnSuccessListener(uri -> Glide.with(parent)
+                        .getDownloadUrl().addOnSuccessListener(uri -> Glide.with(context)
                         .load(uri.toString())
-                        .apply(new RequestOptions()/*.override(500, 500)*/.placeholder(R.drawable.image))
-                        .into(imageView));
+                        .apply(new RequestOptions()
+                                .override(500, 500)
+                                .placeholder(R.drawable.image))
+                        .into(holder.image));
                 break;
-            case 2:
-                Button button = new Button(parent.getContext());
-                button.setText("재생");
-                button.setLayoutParams(layoutParams);
-
-                button.setOnClickListener(v -> {
-                    switch (button.getText().toString()) {
+            case Constants.TYPE_AUDIO:
+                holder.message.setVisibility(View.GONE);
+                holder.image.setVisibility(View.GONE);
+                holder.audioBtn.setVisibility(View.VISIBLE);
+                holder.audioBtn.setOnClickListener(v -> {
+                    switch (holder.audioBtn.getText().toString()) {
                         case "재생":
                             ((TextView) v).setText("중지");
                             References.getStorageRef().child(messageData.getMessage())
@@ -124,10 +107,32 @@ public class ListAdapter extends BaseAdapter {
                             break;
                     }
                 });
-                linearLayout.addView(button);
+                break;
+            case Constants.TYPE_NOTICE:
                 break;
         }
+    }
 
-        return linearLayout;
+    @Override
+    public int getItemCount() {
+        return messageList.size();
+    }
+
+    @Override
+    public int getItemViewType(int pos) {
+        return uuid.equals(messageList.get(pos).getUuid()) ? Constants.USER_MESSAGE : Constants.OTHER_MESSAGE;
+    }
+
+    class ViewHolder extends RecyclerView.ViewHolder {
+        TextView message;
+        ImageView image;
+        Button audioBtn;
+
+        ViewHolder(View itemView) {
+            super(itemView);
+            message = itemView.findViewById(R.id.message);
+            image = itemView.findViewById(R.id.image);
+            audioBtn = itemView.findViewById(R.id.audioBtn);
+        }
     }
 }

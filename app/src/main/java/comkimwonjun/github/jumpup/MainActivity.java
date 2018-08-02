@@ -20,8 +20,6 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.UUID;
 
 public class MainActivity extends AppCompatActivity {
-
-    final static int AUDIO_REQUEST = 1;
     Button startBtn;
     String roomId;
     String uuid;
@@ -68,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
                                 if(dataSnapshot.getValue() == null) {
                                     intent.putExtra("room", roomId);
                                     startActivity(intent);
+                                    progressDialog.dismiss();
                                     finish();
                                 }
                             }
@@ -79,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
                         References.getDbRef().child("emptyRoom").setValue(null);
                         intent.putExtra("room", roomId);
                         startActivity(intent);
+                        progressDialog.dismiss();
                         finish();
                     }
                 }
@@ -93,16 +93,16 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         if(checkSelfPermission(Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)
-            ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.RECORD_AUDIO, Manifest.permission.WRITE_EXTERNAL_STORAGE}, AUDIO_REQUEST);
+            ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.RECORD_AUDIO, Manifest.permission.WRITE_EXTERNAL_STORAGE}, Constants.REQUEST_PERMISSION);
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         switch (requestCode)
         {
-            case AUDIO_REQUEST:
+            case Constants.REQUEST_PERMISSION:
                 if (grantResults.length > 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED)
-                    Log.d("DeBuG", "GRANTED");
+                    Log.d(Constants.TAG, "GRANTED");
                 else {
                     AlertDialog.Builder alert = new AlertDialog.Builder(this);
                     alert.setTitle("알림");

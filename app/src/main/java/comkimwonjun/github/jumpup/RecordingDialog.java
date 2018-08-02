@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.WindowManager;
 import android.widget.Button;
 
@@ -90,7 +89,7 @@ public class RecordingDialog extends Dialog {
         References.getStorageRef().child(path)
                 .putFile(Uri.fromFile(new File(mFileName)))
                 .addOnSuccessListener(taskSnapshot -> {
-                    References.getDbRef().child(room).push().setValue(new MessageData(MessageData.AUDIO, uuid, path));
+                    References.getDbRef().child(room).push().setValue(new MessageData(Constants.TYPE_AUDIO, uuid, path));
                     this.dismiss();
                 })
                 .addOnFailureListener(Throwable::printStackTrace);
