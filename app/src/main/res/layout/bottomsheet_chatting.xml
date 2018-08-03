@@ -33,7 +33,7 @@
         android:orientation="vertical"
         android:gravity="center">
         <ImageView
-            android:src="@drawable/audio"
+            android:src="@drawable/mic"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="오디오" />
