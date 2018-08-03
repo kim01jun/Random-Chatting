@@ -21,7 +21,7 @@
         android:id="@+id/progress_cancel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/button"
+        android:background="@drawable/general_btn"
         android:layout_margin="40dp"
         android:text="취소"
         android:textColor="#fff"/>

@@ -33,7 +33,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
-            android:background="#fff"
+            android:background="@android:color/transparent"
             android:layout_weight="1"
             android:contentDescription="File Sending Button"
             android:src="@drawable/file_btn" />
@@ -53,7 +53,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_marginEnd="5dp"
-            android:background="#fff"
+            android:background="@android:color/transparent"
             android:contentDescription="Message Sending Button"
             android:src="@drawable/send_btn" />
     </LinearLayout>

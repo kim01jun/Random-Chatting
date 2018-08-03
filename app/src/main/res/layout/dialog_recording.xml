@@ -11,6 +11,6 @@
         android:layout_height="wrap_content"
         android:text="녹음하기"
         android:textColor="#fff"
-        android:background="@drawable/button"/>
+        android:background="@drawable/general_btn"/>
 
 </LinearLayout>

@@ -23,7 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="30dp"
-        android:background="@drawable/button"
+        android:background="@drawable/general_btn"
         android:text="시작"
         android:textColor="#fff"
         android:textSize="20sp"
