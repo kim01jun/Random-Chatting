@@ -10,9 +10,8 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.google.firebase.database.ChildEventListener;
@@ -29,8 +28,8 @@ public class ChattingActivity extends AppCompatActivity {
     ListAdapter adapter;
     ArrayList<MessageData> messageList;
     ChildEventListener childEventListener;
-    Button sendBtn;
-    Button fileBtn;
+    ImageButton sendBtn;
+    ImageButton fileBtn;
     EditText sendEdit;
     String room;
     String uuid;
@@ -63,7 +62,6 @@ public class ChattingActivity extends AppCompatActivity {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 MessageData messageData = dataSnapshot.getValue(MessageData.class);
-                Log.d(Constants.TAG, Objects.requireNonNull(messageData).getMessage());
                 messageList.add(messageData);
                 listView.post(() -> {
                     adapter.notifyItemInserted(messageList.size() - 1);

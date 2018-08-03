@@ -1,50 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:weightSum="10"
     tools:context=".ChattingActivity">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/messageList"
-        android:scrollbars="vertical"
-        android:layout_weight="9"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    </android.support.v7.widget.RecyclerView>
-
-    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:orientation="horizontal"
-        android:layout_weight="1"
-        android:weightSum="10"
-        android:gravity="center">
+        android:scrollbars="vertical"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/sendLayout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
-        <Button
+    <LinearLayout
+        android:id="@+id/sendLayout"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:weightSum="10">
+
+        <ImageButton
             android:id="@+id/fileBtn"
-            android:layout_height="40dp"
             android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:background="#fff"
             android:layout_weight="1"
-            android:background="@drawable/file_btn"/>
+            android:contentDescription="File Sending Button"
+            android:src="@drawable/file_btn" />
 
         <EditText
             android:id="@+id/sendEdit"
-            android:hint="할 말"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_margin="5dp"
+            android:layout_height="wrap_content"
             android:layout_weight="8"
+            android:layout_margin="5dp"
+            android:hint="할 말"
             android:inputType="text" />
 
-        <Button
+        <ImageButton
             android:id="@+id/sendBtn"
-            android:background="@drawable/send_btn"
             android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:layout_marginEnd="5dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1" />
+            android:background="#fff"
+            android:contentDescription="Message Sending Button"
+            android:src="@drawable/send_btn" />
     </LinearLayout>
-</LinearLayout>
+</android.support.constraint.ConstraintLayout>

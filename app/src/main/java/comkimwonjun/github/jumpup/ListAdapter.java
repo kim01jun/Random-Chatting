@@ -38,7 +38,6 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        Log.d(Constants.TAG, "Here!");
         int layout = -1;
         switch(viewType) {
             case Constants.OTHER_MESSAGE:
@@ -55,7 +54,6 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         MessageData messageData = messageList.get(position);
-        Log.d(Constants.TAG, messageData.getType() + ": " + messageData.getMessage());
         switch (messageData.getType())
         {
             case Constants.TYPE_TEXT:
