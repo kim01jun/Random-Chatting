@@ -15,7 +15,6 @@ import java.util.Objects;
  * Created by KimWonJun on 2018-07-30.
  */
 public class ProgressDialog extends Dialog {
-    private Button button;
     private View.OnClickListener onClickListener;
 
     ProgressDialog(@NonNull Context context, View.OnClickListener onClickListener) {
@@ -31,7 +30,6 @@ public class ProgressDialog extends Dialog {
         lpWindow.dimAmount = 0.8f;
         Objects.requireNonNull(getWindow()).setAttributes(lpWindow);
         setContentView(R.layout.dialog_progress);
-        button = findViewById(R.id.progress_cancel);
-        button.setOnClickListener(onClickListener);
+        findViewById(R.id.progress_cancel).setOnClickListener(onClickListener);
     }
 }
